@@ -22,7 +22,9 @@ function handleClick (props) {
   const newBoard = [...squares];
   newBoard[square] = turn;
   const newTurn = turn == 'X' ? 'O' : 'X' ;
-  calculateSquares(props);
+  calculateSquares(props).forEach((x) => {newBoard[x] = turn});
+
+
   return (
     {
       squares: newBoard,
@@ -31,6 +33,38 @@ function handleClick (props) {
   )
 }
 
+function calculateSquaresDir({props, dir}) {
+
+  const {squares, square, turn, boardWidth} = props;
+  let potencialSqrs = [];
+  const column = square%boardWidth;
+  const row = Math.floor(square/boardWidth);
+
+  for (let i = 1; i < boardWidth; i++) {
+    const {c, r} = dir({c: column, r: row}, i);
+
+    if (
+      c<0 ||
+      c>=boardWidth ||
+      r<0 ||
+      r>=(squares.length/boardWidth)
+    ) {
+      break;
+    }
+
+    const pos = c+r*boardWidth;
+    const sqr = squares[pos];
+    if (sqr == (turn == 'X' ? 'O' : 'X')) {
+      potencialSqrs = potencialSqrs.concat(pos);
+    } else {
+      if (sqr == turn) {
+        return potencialSqrs;
+      }
+      break;
+    }
+  }
+  return [];
+}
 
 function calculateSquares(props) {
   const {squares, square, turn, boardWidth} = props;
@@ -38,23 +72,79 @@ function calculateSquares(props) {
   const column = square%boardWidth;
   const row = Math.floor(square/boardWidth);
 
-  let revSquares = [];
-  let potencialSquares = [];
-  for (let i = 1; i < boardWidth; i++) {
-    const pos = square-i*boardWidth;
-    const sqr = squares[pos];
-    if (sqr == (turn == 'X' ? 'O' : 'X')) {
-      potencialSquares = potencialSquares.concat(pos);
-      console.log( {potencialSquares} )
-    } else { 
-      if (sqr == turn) {
-        revSquares = revSquares.concat(potencialSquares);
+  let revSquares = [].concat(
+    calculateSquaresDir(
+      {
+        props: props,
+        dir: function ({c, r}, i) {
+          return( {c: c+i, r: r} )
+        } 
       }
-      break;
-    }
-  }
-      
-        
-
-  console.log(revSquares);
+    ).concat(
+      calculateSquaresDir(
+        { 
+          props: props, 
+          dir: function ({c, r}, i) {
+            return( {c: c-i, r: r} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        { 
+          props: props, 
+          dir: function ({c, r}, i) {
+            return( {c: c, r: r+i} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        { 
+          props: props, 
+          dir: function ({c, r}, i) {
+            return( {c: c, r: r-i} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        {
+          props: props,
+          dir: function ({c, r}, i) {
+            return( {c: c+i, r: r+i} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        {
+          props: props,
+          dir: function ({c, r}, i) {
+            return( {c: c+i, r: r-i} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        {
+          props: props,
+          dir: function ({c, r}, i) {
+            return( {c: c-i, r: r+i} )
+          }
+        }
+      )
+    ).concat(
+      calculateSquaresDir(
+        {
+          props: props,
+          dir: function ({c, r}, i) {
+            return( {c: c-i, r: r-i} )
+          }
+        }
+      )
+    )
+  );
+  
+  return(revSquares);
 }

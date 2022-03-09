@@ -46,12 +46,11 @@ function Board(props) {
 
 
 function Game(props) {
-  const boardWidth = 3
+  const boardWidth = 8;
   const [turn, setTurn] = useState('X');
 
 
-//  const [squares, setSquares] = useState(basicBoard());
-  const [squares, setSquares] = useState(new Array(9).fill('•'));
+  const [squares, setSquares] = useState(basicBoard());
 
   let status = ended(squares) ? 'Ended' : 'In progress';
   const winner = winning(squares);
