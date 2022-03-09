@@ -19,7 +19,8 @@ function ended(squares) {
 function winning(squares) {
   const xs = squares.filter(x => x == 'X').length; 
   const os = squares.filter(x => x == 'O').length;
-  return (os>xs ? 'O' : xs>os ? 'X' : 'draw')
+  const winner = (os>xs ? 'O' : xs>os ? 'X' : 'draw')
+  return (winner)
 }
 
 function Square(props) {
@@ -52,28 +53,44 @@ function Board(props) {
   return (board)
 }
 
+function gameLogic(props) {
+  function handleClick ({squares, square, turn}) {
+    const newBoard = [...squares];
+    newBoard[square] = turn;
+    const newTurn = turn == 'X' ? 'O' : 'X' ;
+    return (
+      {
+        squares: newBoard,
+        turn: newTurn,
+      }
+    )
+  }
+
+  const result = props.squares[props.square] != '•' ? props : handleClick(props);
+  return (result)
+}
+
 function Game(props) {
   const boardWidth = 2
   const [turn, setTurn] = useState('X');
-
-  function handleClick(square) {
-    if (squares[square] != '•') {return;}
-
-    const newBoard = [...squares]
-    newBoard[square] = turn
-    
-    setTurn( (turn=='X'? 'O' : 'X') );
-    setSquares( newBoard );
-  }
 
 
 //  const [squares, setSquares] = useState(basicBoard());
   const [squares, setSquares] = useState(new Array(4).fill('•'));
 
-  const gameEnded = ended(squares);
-  const status = gameEnded ? 'Ended' : undefined ;
-
+  let status = ended(squares) ? 'Ended' : 'In progress';
   const winner = winning(squares);
+
+
+  function handleClick(square) {
+    const t = gameLogic({squares: squares, square: square, turn: turn})
+    const {squares: newBoard, turn: newTurn } = t;
+
+    setTurn( newTurn ) ;
+    setSquares( newBoard );
+
+  }
+
 
 
   return (
