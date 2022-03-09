@@ -12,6 +12,22 @@ function basicBoard() {
   return (board)
 }
 
+function ended(squares) {
+  return (!squares.some(x => x == '•'))
+}
+
+function winning(squares) {
+  const xs = squares.filter(x => x == 'X').length; 
+  const os = squares.filter(x => x == 'O').length;
+  let winner = 'draw';
+  if (os>xs) {
+    winner = 'O'
+  }
+  if (xs>os) {
+    winner = 'X'
+  }
+  return winner
+}
 
 function Square(props) {
 
@@ -43,21 +59,36 @@ function Board(props) {
 }
 
 function Game(props) {
-  const boardWidth = 8
+  const boardWidth = 2
   const [turn, setTurn] = useState('X');
-  
+  let status;
+
   function handleClick(square) {
     if (squares[square] != '•') {return;}
+
     const newBoard = [...squares]
     newBoard[square] = turn
+    
     setTurn( (turn=='X'? 'O' : 'X') );
     setSquares( newBoard );
   }
 
-  const [squares, setSquares] = useState(basicBoard())
+
+//  const [squares, setSquares] = useState(basicBoard());
+  const [squares, setSquares] = useState(new Array(4).fill('•'));
+
+  const gameEnded = ended(squares);
+  if (gameEnded) { status = 'Ended' };
+
+  const winner = winning(squares);
 
 
   return (
+<div>
+    <div>
+      <p> {status} </p>
+      <p> Winning: {winner} </p>
+    </div>
     <div>
       <Board
         squares={squares}
@@ -65,6 +96,7 @@ function Game(props) {
         boardWidth={boardWidth}
       />
     </div>
+</div>
   )
 }
 
