@@ -12,18 +12,49 @@ export function winning(squares) {
 
 
 export function playTurn(props) {
-  function handleClick ({squares, square, turn}) {
-    const newBoard = [...squares];
-    newBoard[square] = turn;
-    const newTurn = turn == 'X' ? 'O' : 'X' ;
-    return (
-      {
-        squares: newBoard,
-        turn: newTurn,
-      }
-    )
-  }
-
   const result = props.squares[props.square] != '•' ? props : handleClick(props);
   return (result)
+}
+
+
+function handleClick (props) { 
+  const {squares, square, turn, boardWidth} = props;
+  const newBoard = [...squares];
+  newBoard[square] = turn;
+  const newTurn = turn == 'X' ? 'O' : 'X' ;
+  calculateSquares(props);
+  return (
+    {
+      squares: newBoard,
+      turn: newTurn,
+    }
+  )
+}
+
+
+function calculateSquares(props) {
+  const {squares, square, turn, boardWidth} = props;
+
+  const column = square%boardWidth;
+  const row = Math.floor(square/boardWidth);
+
+  let revSquares = [];
+  let potencialSquares = [];
+  for (let i = 1; i < boardWidth; i++) {
+    const pos = square-i*boardWidth;
+    const sqr = squares[pos];
+    if (sqr == (turn == 'X' ? 'O' : 'X')) {
+      potencialSquares = potencialSquares.concat(pos);
+      console.log( {potencialSquares} )
+    } else { 
+      if (sqr == turn) {
+        revSquares = revSquares.concat(potencialSquares);
+      }
+      break;
+    }
+  }
+      
+        
+
+  console.log(revSquares);
 }

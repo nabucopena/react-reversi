@@ -46,19 +46,19 @@ function Board(props) {
 
 
 function Game(props) {
-  const boardWidth = 2
+  const boardWidth = 3
   const [turn, setTurn] = useState('X');
 
 
 //  const [squares, setSquares] = useState(basicBoard());
-  const [squares, setSquares] = useState(new Array(4).fill('•'));
+  const [squares, setSquares] = useState(new Array(9).fill('•'));
 
   let status = ended(squares) ? 'Ended' : 'In progress';
   const winner = winning(squares);
 
 
   function handleClick(square) {
-    const t = playTurn({squares: squares, square: square, turn: turn})
+    const t = playTurn({squares: squares, square: square, turn: turn, boardWidth: boardWidth})
     const {squares: newBoard, turn: newTurn } = t;
 
     setTurn( newTurn ) ;
