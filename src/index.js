@@ -18,9 +18,7 @@ function Square(props) {
   return (
     <button
       className="square"
-      onClick={
-        props.value=='•'? props.onClick : null
-      }
+      onClick={props.onClick}
     >
       {props.value}
     </button>
@@ -49,6 +47,7 @@ function Game(props) {
   const [turn, setTurn] = useState('X');
   
   function handleClick(square) {
+    if (squares[square] != '•') {return;}
     const newBoard = [...squares]
     newBoard[square] = turn
     setTurn( (turn=='X'? 'O' : 'X') );
