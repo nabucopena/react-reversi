@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import {playTurn, winning, ended} from './gameLogic.js';
 
 
 function basicBoard() {
@@ -12,16 +13,6 @@ function basicBoard() {
   return (board)
 }
 
-function ended(squares) {
-  return (!squares.some(x => x == '•'))
-}
-
-function winning(squares) {
-  const xs = squares.filter(x => x == 'X').length; 
-  const os = squares.filter(x => x == 'O').length;
-  const winner = (os>xs ? 'O' : xs>os ? 'X' : 'draw')
-  return (winner)
-}
 
 function Square(props) {
 
@@ -53,22 +44,6 @@ function Board(props) {
   return (board)
 }
 
-function gameLogic(props) {
-  function handleClick ({squares, square, turn}) {
-    const newBoard = [...squares];
-    newBoard[square] = turn;
-    const newTurn = turn == 'X' ? 'O' : 'X' ;
-    return (
-      {
-        squares: newBoard,
-        turn: newTurn,
-      }
-    )
-  }
-
-  const result = props.squares[props.square] != '•' ? props : handleClick(props);
-  return (result)
-}
 
 function Game(props) {
   const boardWidth = 2
@@ -83,7 +58,7 @@ function Game(props) {
 
 
   function handleClick(square) {
-    const t = gameLogic({squares: squares, square: square, turn: turn})
+    const t = playTurn({squares: squares, square: square, turn: turn})
     const {squares: newBoard, turn: newTurn } = t;
 
     setTurn( newTurn ) ;
