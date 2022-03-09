@@ -52,7 +52,7 @@ function Game(props) {
 
   const [squares, setSquares] = useState(basicBoard());
 
-  let status = ended(squares) ? 'Ended' : 'In progress';
+  let status = ended(squares) ? 'Ended' : ('Turn: ' + turn);
   const winner = winning(squares);
 
 
