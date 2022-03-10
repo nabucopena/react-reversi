@@ -8,7 +8,7 @@ export function winning(squares) {
 
 
 export function playTurn(props) {
-  const result = props.squares[props.square] != '•' || props.turn == 'ended' ? props : handleClick(props);
+  const result = props.squares[props.square] != '•' || props.turn == 'ended' ? props : move(props);
   return (result)
 }
 
@@ -20,14 +20,15 @@ function somePossibleMove(props) {
 }
 
 
-function handleClick (props) { 
-  const {squares, square, turn, boardWidth} = props;
-  const newBoard = [...squares];
-  newBoard[square] = turn;
+function move(props) { 
   const changedSquares = calculateSquares(props)
   if (changedSquares.length < 1) {
     return props
   }  
+
+  const {squares, square, turn, boardWidth} = props;
+  const newBoard = [...squares];
+  newBoard[square] = turn;
   changedSquares.forEach((x) => {newBoard[x] = turn});
   const noTurn = turn == 'X' ? 'O' : 'X';
   const newTurn = somePossibleMove({squares: newBoard, turn: noTurn, boardWidth: boardWidth}) ? noTurn : somePossibleMove({squares: newBoard, turn: turn, boardWidth: boardWidth}) ? turn : 'ended';
