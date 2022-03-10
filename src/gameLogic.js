@@ -81,79 +81,16 @@ function calculateSquares(props) {
   const column = square%boardWidth;
   const row = Math.floor(square/boardWidth);
 
-  let revSquares = [].concat(
-    calculateSquaresDir(
-      {
-        props: props,
-        dir: function ({c, r}, i) {
-          return( {c: c+i, r: r} )
-        } 
-      }
-    ).concat(
-      calculateSquaresDir(
-        { 
-          props: props, 
-          dir: function ({c, r}, i) {
-            return( {c: c-i, r: r} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        { 
-          props: props, 
-          dir: function ({c, r}, i) {
-            return( {c: c, r: r+i} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        { 
-          props: props, 
-          dir: function ({c, r}, i) {
-            return( {c: c, r: r-i} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        {
-          props: props,
-          dir: function ({c, r}, i) {
-            return( {c: c+i, r: r+i} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        {
-          props: props,
-          dir: function ({c, r}, i) {
-            return( {c: c+i, r: r-i} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        {
-          props: props,
-          dir: function ({c, r}, i) {
-            return( {c: c-i, r: r+i} )
-          }
-        }
-      )
-    ).concat(
-      calculateSquaresDir(
-        {
-          props: props,
-          dir: function ({c, r}, i) {
-            return( {c: c-i, r: r-i} )
-          }
-        }
-      )
-    )
-  );
+  let revSquares = [
+    ({c, r}, i) => ({c: c+i, r: r}),
+    ({c, r}, i) => ({c: c-i, r: r}),
+    ({c, r}, i) => ({c: c, r: r+i}),
+    ({c, r}, i) => ({c: c, r: r-i}),
+    ({c, r}, i) => ({c: c+i, r: r+i}),
+    ({c, r}, i) => ({c: c+i, r: r-i}),
+    ({c, r}, i) => ({c: c-i, r: r+i}),
+    ({c, r}, i) => ({c: c-i, r: r-i}),
+  ].flatMap((x) => calculateSquaresDir({props, dir: x}))
   
   return(revSquares);
 }
