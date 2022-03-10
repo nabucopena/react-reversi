@@ -5,12 +5,16 @@ import {playTurn, winning} from './gameLogic.js';
 
 
 function basicBoard() {
-  const board = new Array(8*8).fill('•');
+  const board = new Array(8*8).fill(null);
   board[3*8+3] = 'O';
   board[3*8+4] = 'X';
   board[4*8+3] = 'X';
   board[4*8+4] = 'O';
   return (board)
+}
+
+function setBoardPlayers(squares, x, o, n) {
+  return squares.map((s) => s == 'X' ? x : s == 'O' ? o : n)
 }
 
 
@@ -62,6 +66,8 @@ function Game(props) {
     setSquares( newBoard );
 
   }
+  
+  const board = setBoardPlayers(squares, 'X', 'O', '•')
 
 
 
@@ -73,7 +79,7 @@ function Game(props) {
     </div>
     <div>
       <Board
-        squares={squares}
+        squares={board}
         onClick={(i) => {handleClick(i)}}
         boardWidth={boardWidth}
       />

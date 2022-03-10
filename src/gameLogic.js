@@ -8,7 +8,7 @@ export function winning(squares) {
 
 
 export function playTurn(gameState, square) {
-  const result = gameState.squares[square] != '•' || gameState.turn == 'ended' ? gameState : move(gameState, square);
+  const result = gameState.squares[square] || gameState.turn == 'ended' ? gameState : move(gameState, square);
   return (result)
 }
 
@@ -16,7 +16,7 @@ export function playTurn(gameState, square) {
 function somePossibleMove(gameState) {
   const result = gameState.squares.some(
     (x, i) => (
-      x == '•' && calculateSquares(
+      !x && calculateSquares(
         gameState, i
       ).length > 0
     )
