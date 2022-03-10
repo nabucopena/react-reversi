@@ -24,7 +24,11 @@ function handleClick (props) {
   const {squares, square, turn, boardWidth} = props;
   const newBoard = [...squares];
   newBoard[square] = turn;
-  calculateSquares(props).forEach((x) => {newBoard[x] = turn});
+  const changedSquares = calculateSquares(props)
+  if (changedSquares.length < 1) {
+    return props
+  }  
+  changedSquares.forEach((x) => {newBoard[x] = turn});
   const noTurn = turn == 'X' ? 'O' : 'X';
   const newTurn = somePossibleMove({squares: newBoard, turn: noTurn, boardWidth: boardWidth}) ? noTurn : somePossibleMove({squares: newBoard, turn: turn, boardWidth: boardWidth}) ? turn : 'ended';
 
