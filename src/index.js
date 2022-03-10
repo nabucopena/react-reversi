@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {playTurn, winning, ended} from './gameLogic.js';
+import {playTurn, winning} from './gameLogic.js';
 
 
 function basicBoard() {
@@ -48,11 +48,9 @@ function Board(props) {
 function Game(props) {
   const boardWidth = 8;
   const [turn, setTurn] = useState('X');
-
-
   const [squares, setSquares] = useState(basicBoard());
 
-  let status = ended(squares) ? 'Ended' : ('Turn: ' + turn);
+  let status = turn == 'ended' ? 'Ended' : ('Turn: ' + turn);
   const winner = winning(squares);
 
 

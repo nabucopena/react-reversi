@@ -1,7 +1,3 @@
-export function ended(squares) {
-  return (!(squares.some(x => x == '•') && squares.some(x => x == 'X') && squares.some(x => x == 'O')))
-}
-
 export function winning(squares) {
   const xs = squares.filter(x => x == 'X').length;
   const os = squares.filter(x => x == 'O').length;
@@ -12,7 +8,7 @@ export function winning(squares) {
 
 
 export function playTurn(props) {
-  const result = ended(props.squares) || props.squares[props.square] != '•' ? props : handleClick(props);
+  const result = props.squares[props.square] != '•' || props.turn == 'ended' ? props : handleClick(props);
   return (result)
 }
 
@@ -27,7 +23,7 @@ function handleClick (props) {
   const newBoard = [...squares];
   newBoard[square] = turn;
   const noTurn = turn == 'X' ? 'O' : 'X';
-  const newTurn = somePossibleMove({squares: newBoard, turn: noTurn}) ? noTurn : turn;
+  const newTurn = somePossibleMove({squares: newBoard, turn: noTurn}) ? noTurn : somePossibleMove({squares: newBoard, turn: turn}) ? turn : 'ended';
   calculateSquares(props).forEach((x) => {newBoard[x] = turn});
 
 
