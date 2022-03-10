@@ -7,17 +7,17 @@ export function winning(squares) {
 
 
 
-export function playTurn(props) {
-  const result = props.squares[props.square] != '•' || props.turn == 'ended' ? props : move(props);
+export function playTurn(gameState, square) {
+  const result = gameState.squares[square] != '•' || gameState.turn == 'ended' ? gameState : move(gameState, square);
   return (result)
 }
 
 
-function somePossibleMove(props) {
-  const result = props.squares.some(
+function somePossibleMove(gameState) {
+  const result = gameState.squares.some(
     (x, i) => (
       x == '•' && calculateSquares(
-        {squares: props.squares, square: i, turn: props.turn, boardWidth: props.boardWidth}
+        gameState, i
       ).length > 0
     )
   );
@@ -25,13 +25,13 @@ function somePossibleMove(props) {
 }
 
 
-function move(props) { 
-  const changedSquares = calculateSquares(props)
+function move(gameState, square) { 
+  const changedSquares = calculateSquares(gameState, square)
   if (changedSquares.length < 1) {
-    return props
+    return gameState;
   }  
 
-  const {squares, square, turn, boardWidth} = props;
+  const {squares, turn, boardWidth} = gameState;
   const newBoard = [...squares];
   newBoard[square] = turn;
   changedSquares.forEach((x) => {newBoard[x] = turn});
@@ -47,9 +47,9 @@ function move(props) {
   )
 }
 
-function calculateSquaresDir({props, dir}) {
+function calculateSquaresDir(gameState, square, dir) {
 
-  const {squares, square, turn, boardWidth} = props;
+  const {squares, turn, boardWidth} = gameState;
   let potencialSqrs = [];
   const column = square%boardWidth;
   const row = Math.floor(square/boardWidth);
@@ -80,8 +80,8 @@ function calculateSquaresDir({props, dir}) {
   return [];
 }
 
-function calculateSquares(props) {
-  const {squares, square, turn, boardWidth} = props;
+function calculateSquares(gameState, square) {
+  const {squares, turn, boardWidth} = gameState;
 
   const column = square%boardWidth;
   const row = Math.floor(square/boardWidth);
@@ -95,7 +95,7 @@ function calculateSquares(props) {
     ({c, r}, i) => ({c: c+i, r: r-i}),
     ({c, r}, i) => ({c: c-i, r: r+i}),
     ({c, r}, i) => ({c: c-i, r: r-i}),
-  ].flatMap((x) => calculateSquaresDir({props, dir: x}))
+  ].flatMap((x) => calculateSquaresDir(gameState, square, x))
   
   return(revSquares);
 }

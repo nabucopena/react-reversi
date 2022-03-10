@@ -55,7 +55,7 @@ function Game(props) {
 
 
   function handleClick(square) {
-    const t = playTurn({squares: squares, square: square, turn: turn, boardWidth: boardWidth})
+    const t = playTurn({squares: squares, turn: turn, boardWidth: boardWidth}, square)
     const {squares: newBoard, turn: newTurn } = t;
 
     setTurn( newTurn ) ;
