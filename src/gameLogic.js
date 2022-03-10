@@ -14,7 +14,9 @@ export function playTurn(props) {
 
 
 function somePossibleMove(props) {
-  return true;
+  const board = props.squares.map((x, i) => x == '•' ? i : null).filter((y) => y != null);
+  const result = board.some((x) => calculateSquares({squares: props.squares, square: x, turn: props.turn, boardWidth: props.boardWidth}).length > 0);
+  return result;
 }
 
 
@@ -22,9 +24,9 @@ function handleClick (props) {
   const {squares, square, turn, boardWidth} = props;
   const newBoard = [...squares];
   newBoard[square] = turn;
-  const noTurn = turn == 'X' ? 'O' : 'X';
-  const newTurn = somePossibleMove({squares: newBoard, turn: noTurn}) ? noTurn : somePossibleMove({squares: newBoard, turn: turn}) ? turn : 'ended';
   calculateSquares(props).forEach((x) => {newBoard[x] = turn});
+  const noTurn = turn == 'X' ? 'O' : 'X';
+  const newTurn = somePossibleMove({squares: newBoard, turn: noTurn, boardWidth: boardWidth}) ? noTurn : somePossibleMove({squares: newBoard, turn: turn, boardWidth: boardWidth}) ? turn : 'ended';
 
 
   return (
