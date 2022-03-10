@@ -14,8 +14,13 @@ export function playTurn(props) {
 
 
 function somePossibleMove(props) {
-  const board = props.squares.map((x, i) => x == '•' ? i : null).filter((y) => y != null);
-  const result = board.some((x) => calculateSquares({squares: props.squares, square: x, turn: props.turn, boardWidth: props.boardWidth}).length > 0);
+  const result = props.squares.some(
+    (x, i) => (
+      x == '•' && calculateSquares(
+        {squares: props.squares, square: i, turn: props.turn, boardWidth: props.boardWidth}
+      ).length > 0
+    )
+  );
   return result;
 }
 
