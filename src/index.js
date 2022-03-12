@@ -66,6 +66,11 @@ function Game(props) {
     setSquares( newBoard );
 
   }
+
+  function restartGame() {
+    setTurn('X');
+    setSquares(basicBoard());
+  }
   
   const board = setBoardPlayers(squares, 'X', 'O', '•')
 
@@ -76,6 +81,11 @@ function Game(props) {
     <div>
       <p> {status} </p>
       <p> Winning: {winner} </p>
+      <p>
+        <button onClick= {restartGame}>
+          Restart
+        </button>
+      </p>
     </div>
     <div>
       <Board
