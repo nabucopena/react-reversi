@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {playTurn, winning} from './gameLogic.js';
+import {playTurn, winning, botMove} from './gameLogic.js';
 
 
 function basicBoard() {
@@ -71,6 +71,11 @@ function Game(props) {
     setTurn('X');
     setSquares(basicBoard());
   }
+
+  function callBot(gameState) {
+    const move = botMove(gameState);
+    handleClick(move)
+  }
   
   const board = setBoardPlayers(squares, 'X', 'O', '•')
 
@@ -84,6 +89,11 @@ function Game(props) {
       <p>
         <button onClick= {restartGame}>
           Restart
+        </button>
+      </p>
+      <p>
+        <button onClick= {(i) => callBot({squares, turn, boardWidth})}>
+          Automove
         </button>
       </p>
     </div>

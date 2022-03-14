@@ -12,6 +12,25 @@ export function playTurn(gameState, square) {
   return (result)
 }
 
+export function botMove(gameState) {
+  const points = gameState.squares.map(
+    (x, i) => (
+      !x && calculateSquares(
+        gameState, i
+      ).length
+    )
+  );
+  const maxPoints = Math.max.apply(null, points);
+  const result = gameState.squares.findIndex(
+    (x, i) => (
+      !x && calculateSquares(
+        gameState, i
+      ).length == maxPoints
+    )
+  );
+  
+  return result
+}
 
 function somePossibleMove(gameState) {
   const result = gameState.squares.some(
