@@ -20,14 +20,7 @@ export function botMove(gameState) {
       ).length
     )
   );
-  const maxPoints = Math.max.apply(null, points);
-  const result = gameState.squares.findIndex(
-    (x, i) => (
-      !x && calculateSquares(
-        gameState, i
-      ).length == maxPoints
-    )
-  );
+  const result = points.reduce( (bestIndex, currentValue, currentIndex) => (currentValue > points[bestIndex] ? currentIndex : bestIndex), 0);
   
   return result
 }
