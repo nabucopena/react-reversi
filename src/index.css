@@ -28,10 +28,15 @@
 #game {
 }
 
-#gameInfo {}
+#gameInfo {
+  margin: auto;
+  width: 50%;
+}
 
-#gameOptions {}
-
+#gameOptions {
+  margin: auto;
+  width: 50%;
+}
 
 #board {
   margin: auto;
