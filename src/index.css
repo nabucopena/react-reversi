@@ -24,7 +24,7 @@
 .xPiece {
   background-size: cover;
   background-position: center center;
-  background-image: url("../public/putin_face.jpeg")
+  background-image: url("../public/putin_face.jpeg");
 }
 
 .oPiece {
@@ -55,3 +55,11 @@
   width: 50%;
   padding: 10px;
 } 
+
+#turnFlag {
+  width: 40px;
+  height: 20px;
+  vertical-align: center center;
+  border: solid 1px;
+}
+

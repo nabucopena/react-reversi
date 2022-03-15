@@ -54,7 +54,7 @@ function Game(props) {
   const [turn, setTurn] = useState('X');
   const [squares, setSquares] = useState(basicBoard());
 
-  let status = turn == 'ended' ? 'Ended' : ('Turn: ' + turn);
+  let status = turn == 'ended' ? 'Ended' : turn;
   const winner = winning(squares);
 
 
@@ -84,7 +84,11 @@ function Game(props) {
   return (
     <div id="game">
       <div id="gameInfo">
-        <p> {status} </p>
+        {status === 'Ended' ? <p> Ended </p> :
+          <p> Turn: 
+            <img id="turnFlag" src={status === 'X' ? "../russia_flag.png" : "../ukraine_flag.png"}/>
+          </p>
+        } 
         <p> Winning: {winner} </p>
       </div>
       <div id="gameOptions">
