@@ -5,7 +5,7 @@ export function winning(squares) {
   return (winner)
 }
 
-export function playersPoints(square) {
+export function playersPoints(squares) {
   const xs = squares.filter(x => x == 'X').length;
   const os = squares.filter(x => x == 'O').length;
   return({xs, os})
