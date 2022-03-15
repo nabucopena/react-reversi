@@ -12,13 +12,20 @@
   width: 34px;
 }
 
+.wSquare {
+  background: #fff
+}
+
+.bSquare {
+  background: rgb(118,150,86)
+}
+
 .board-row {
   margin: auto;
   width: 50%;
 } 
 
 #game {
-  color: blue
 }
 
 #gameInfo {}

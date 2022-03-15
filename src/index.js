@@ -22,7 +22,7 @@ function Square(props) {
 
   return (
     <button
-      className="square"
+      className={props.className + " square"}
       onClick={props.onClick}
     >
       {props.value}
@@ -41,6 +41,7 @@ function Board(props) {
             key={ i*boardWidth+j }
             value={props.squares[ i*boardWidth+j ]}
             onClick={() => props.onClick( i*boardWidth+j )}
+            className={(i+j)%2 === 0 ? "wSquare" : "bSquare"}
           /> ) }
         </div>
       );
