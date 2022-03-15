@@ -78,7 +78,7 @@ function Game(props) {
     handleClick(move)
   }
   
-  const board = setBoardPlayers(squares, 'X', 'O', '•')
+  const board = setBoardPlayers(squares, 'X', 'O', null)
 
 
 
