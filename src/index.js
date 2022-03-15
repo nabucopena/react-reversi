@@ -35,14 +35,14 @@ function Board(props) {
   const boardWidth = props.boardWidth
 
   const board =
-    range.map( (_, i) =>
-      <div key={i} className="board-row">
-        { range.map( (_,j) => <Square
-          key={ i*boardWidth+j }
-          value={props.squares[ i*boardWidth+j ]}
-          onClick={() => props.onClick( i*boardWidth+j )}
-        /> ) }
-      </div>
+      range.map( (_, i) =>
+        <div key={i} className="board-row">
+          { range.map( (_,j) => <Square
+            key={ i*boardWidth+j }
+            value={props.squares[ i*boardWidth+j ]}
+            onClick={() => props.onClick( i*boardWidth+j )}
+          /> ) }
+        </div>
       );
   
   return (board)
@@ -82,29 +82,31 @@ function Game(props) {
 
 
   return (
-<div>
-    <div>
-      <p> {status} </p>
-      <p> Winning: {winner} </p>
-      <p>
-        <button onClick= {restartGame}>
-          Restart
-        </button>
-      </p>
-      <p>
-        <button onClick= {(i) => callBot({squares, turn, boardWidth})}>
-          Automove
-        </button>
-      </p>
+    <div id="game">
+      <div id="gameInfo">
+        <p> {status} </p>
+        <p> Winning: {winner} </p>
+      </div>
+      <div id="gameOptions">
+        <p>
+          <button onClick= {restartGame}>
+            Restart
+          </button>
+        </p>
+        <p>
+          <button onClick= {(i) => callBot({squares, turn, boardWidth})}>
+            Automove
+          </button>
+        </p>
+      </div>
+      <div id="board">
+        <Board
+          squares={board}
+          onClick={(i) => {handleClick(i)}}
+          boardWidth={boardWidth}
+        />
+      </div>
     </div>
-    <div>
-      <Board
-        squares={board}
-        onClick={(i) => {handleClick(i)}}
-        boardWidth={boardWidth}
-      />
-    </div>
-</div>
   )
 }
 
