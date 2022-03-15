@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {playTurn, winning, botMove} from './gameLogic.js';
+import {playTurn, winning, playersPoints, botMove} from './gameLogic.js';
 
 
 function basicBoard() {
