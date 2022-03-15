@@ -22,10 +22,9 @@ function Square(props) {
 
   return (
     <button
-      className={props.className + " square"}
+      className={props.className + " square " + (props.value == 'X' ? 'xPiece' : props.value == 'O' ? 'oPiece' : '')}
       onClick={props.onClick}
     >
-      {props.value}
     </button>
   );
 }

@@ -4,12 +4,12 @@
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 34px;
+  height: 68px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 68px;
   vertical-align: top;
 }
 
@@ -21,9 +21,20 @@
   background: rgb(118,150,86)
 }
 
+.xPiece {
+  background-size: cover;
+  background-position: center center;
+  background-image: url("../public/putin_face.jpeg")
+}
+
+.oPiece {
+  background-size: cover;
+  background-position: center center;
+  background-image: url("../public/zelensky.jpeg")
+}
+
 .board-row {
   margin: auto;
-  width: 50%;
 } 
 
 #game {
