@@ -5,7 +5,11 @@ export function winning(squares) {
   return (winner)
 }
 
-
+export function playersPoints(square) {
+  const xs = squares.filter(x => x == 'X').length;
+  const os = squares.filter(x => x == 'O').length;
+  return({xs, os})
+}
 
 export function playTurn(gameState, square) {
   const result = gameState.squares[square] || gameState.turn == 'ended' ? gameState : move(gameState, square);
