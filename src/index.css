@@ -12,3 +12,22 @@
   width: 34px;
 }
 
+.board-row {
+  margin: auto;
+  width: 50%;
+} 
+
+#game {
+  color: blue
+}
+
+#gameInfo {}
+
+#gameOptions {}
+
+
+#board {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+} 
