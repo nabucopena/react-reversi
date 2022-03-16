@@ -19,14 +19,26 @@ export function playTurn(gameState, square) {
 export function botMove(gameState) {
   const points = gameState.squares.map(
     (x, i) => (
-      !x && calculateSquares(
-        gameState, i
-      ).length
+      !x && evalBoard(move(gameState, i).squares, gameState.turn)
     )
   );
-  const result = points.reduce( (bestIndex, currentValue, currentIndex) => (currentValue > points[bestIndex] ? currentIndex : bestIndex), 0);
+  const bestMovesArray = points.reduce(
+    (bestIndices, currentValue, currentIndex) => (
+      currentValue > points[bestIndices[0]] ?
+        [currentIndex] :
+        currentValue == points[bestIndices[0]] ?
+          [...bestIndices, currentIndex]:
+          bestIndices
+    ),
+    [0]
+  );
+  return bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
+}
+
+function evalBoard(board, player) {
+  const result = board.filter(x => x == player).length; 
   
-  return result
+  return result;
 }
 
 function somePossibleMove(gameState) {

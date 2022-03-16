@@ -78,7 +78,6 @@ function Game(props) {
   }
 
   function handleMove(gameState, square) {
-    console.log(squares);
     const t = playTurn({squares: gameState.squares, turn: gameState.turn, boardWidth: gameState.boardWidth}, square)
     const {squares: newBoard, turn: newTurn } = t;
 
@@ -89,7 +88,6 @@ function Game(props) {
       setTimeout (
         () => {
           callBot({squares: newBoard, turn: newTurn, boardWidth: gameState.boardWidth})
-          console.log(newBoard)
         },
         500
       )
