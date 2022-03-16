@@ -83,29 +83,20 @@ function Game(props) {
 
   return (
     <div id="game">
-      <div id="gameInfo">
+      <div id="gameInfo"> 
         {status === 'Ended' ? <p> Ended </p> :
-          <p> Turn: 
-            <img id="turnFlag" className="flag" src={status === 'X' ? "russia_flag.png" : "ukraine_flag.png"}/>
-          </p>
+          <div className="center">
+            <p>
+              Turn 
+            </p>
+            <img id="turnFlag" src={status === 'X' ? "russia_flag.png" : "ukraine_flag.png"}/>
+          </div>
         } 
-        <p> Winning: {winner} </p>
-      </div>
-      <div id="gameOptions">
-        <p>
-          <button onClick= {restartGame}>
-            Restart
-          </button>
-        </p>
-        <p>
-          <button onClick= {(i) => callBot({squares, turn, boardWidth})}>
-            Automove
-          </button>
-        </p>
       </div>
       <div className="flex">
         <div className="flag">
           <img className="flag" id="ukraine_flag" src="ukraine_flag.png"/>
+          <p> puntos </p>
         </div>
         <div id="board">
           <Board
@@ -116,6 +107,12 @@ function Game(props) {
         </div>
         <div className="flag">
           <img className="flag" id="russia_flag" src="russia_flag.png"/>
+          <p> puntos </p>
+          <p id="restart">
+            <button onClick= {restartGame}>
+              Restart
+            </button>
+          </p>
         </div>
       </div>
     </div>
