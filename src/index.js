@@ -77,7 +77,9 @@ function Game(props) {
     handleClick(move)
   }
   
-  const board = setBoardPlayers(squares, 'X', 'O', null)
+  const board = setBoardPlayers(squares, 'X', 'O', null);
+ 
+  const [russia_points, ukraine_points] = playersPoints(squares);
 
 
 
@@ -96,7 +98,9 @@ function Game(props) {
       <div className="flex">
         <div className="flag">
           <img className="flag" id="ukraine_flag" src="ukraine_flag.png"/>
-          <p> puntos </p>
+          <p id="ukraine_flag" className="points">
+            {ukraine_points} 
+          </p>
         </div>
         <div id="board">
           <Board
@@ -107,7 +111,9 @@ function Game(props) {
         </div>
         <div className="flag">
           <img className="flag" id="russia_flag" src="russia_flag.png"/>
-          <p> puntos </p>
+          <p id="russia_flag" className="points">
+            {russia_points}
+          </p>
           <p id="restart">
             <button onClick= {restartGame}>
               Restart

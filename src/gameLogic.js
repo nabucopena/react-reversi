@@ -8,7 +8,7 @@ export function winning(squares) {
 export function playersPoints(squares) {
   const xs = squares.filter(x => x == 'X').length;
   const os = squares.filter(x => x == 'O').length;
-  return({xs, os})
+  return([xs, os])
 }
 
 export function playTurn(gameState, square) {
