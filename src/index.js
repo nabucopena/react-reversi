@@ -114,11 +114,6 @@ function Game(props) {
           <p className="points russia_flag">
             {russia_points}
           </p>
-          <p className="restart">
-            <button onClick= {restartGame}>
-              Restart
-            </button>
-          </p>
         </div>
       </div>
     </div>
@@ -133,8 +128,8 @@ function Start(props) {
         Select player
       </p>
     </div>
-    <button className="selectUkraineFlag"/>
-    <button className="selectRussiaFlag"/>
+    <button className="selectUkraineFlag" onClick={props.onClick} />
+    <button className="selectRussiaFlag" onClick={props.onClick} />
   </div>
   )
 }
