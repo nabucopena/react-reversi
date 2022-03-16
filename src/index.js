@@ -48,23 +48,52 @@ function Board(props) {
   return (board)
 }
 
-
 function Game(props) {
   const boardWidth = 8;
   const [turn, setTurn] = useState('X');
   const [squares, setSquares] = useState(basicBoard());
+  const [firstTurn, setFirstTurn] = useState(true);
+
+  if (firstTurn) {
+    setFirstTurn(false);
+    if (turn != props.player) {
+      setTimeout (
+        () => {
+          callBot({squares, turn, boardWidth})
+        },
+        500
+      )
+    }
+  }
+  
 
   let status = turn == 'ended' ? 'Ended' : turn;
   const winner = winning(squares);
 
 
-  function handleClick(square) {
-    const t = playTurn({squares: squares, turn: turn, boardWidth: boardWidth}, square)
+
+  function handleClick(gameState, square) {
+    if (turn != props.player) {return;}
+    handleMove(gameState, square)
+  }
+
+  function handleMove(gameState, square) {
+    console.log(squares);
+    const t = playTurn({squares: gameState.squares, turn: gameState.turn, boardWidth: gameState.boardWidth}, square)
     const {squares: newBoard, turn: newTurn } = t;
 
-    setTurn( newTurn ) ;
     setSquares( newBoard );
-
+    setTurn( newTurn );
+  
+    if (newTurn == (props.player == 'X' ? 'O' : 'X')) {
+      setTimeout (
+        () => {
+          callBot({squares: newBoard, turn: newTurn, boardWidth: gameState.boardWidth})
+          console.log(newBoard)
+        },
+        500
+      )
+    }
   }
 
   function restartGame() {
@@ -74,7 +103,8 @@ function Game(props) {
 
   function callBot(gameState) {
     const move = botMove(gameState);
-    handleClick(move)
+    handleMove(gameState, move)
+    
   }
   
   const board = setBoardPlayers(squares, 'X', 'O', null);
@@ -105,7 +135,7 @@ function Game(props) {
         <div className="board">
           <Board
             squares={board}
-            onClick={(i) => {handleClick(i)}}
+            onClick={(i) => {handleClick({squares, turn, boardWidth},i)}}
             boardWidth={boardWidth}
           />
         </div>
@@ -128,19 +158,22 @@ function Start(props) {
         Select player
       </p>
     </div>
-    <button className="select-flag selectUkraineFlag" onClick={props.onClick} />
-    <button className="select-flag selectRussiaFlag" onClick={props.onClick} />
+    <button className="select-flag selectUkraineFlag" onClick={() => {props.onClick('ukraine')}} />
+    <button className="select-flag selectRussiaFlag" onClick={() => {props.onClick('russia')}} />
   </div>
   )
 }
 
 function Page(props) {
   const [pageState, setPageState] = useState('start');
+  const [player, setPlayer] = useState();
   
   return(
     pageState === 'start' ? <Start
-        onClick={() => {setPageState('game')}}
-      /> : <Game/>
+        onClick={(player) => {setPageState('game'); setPlayer(player);}}
+      /> : <Game
+        player={player == 'russia' ? 'X' : 'O'}
+      />
   )
 }
 

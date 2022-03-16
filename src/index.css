@@ -46,6 +46,7 @@
   text-align: center;
   width: 50%;
   margin: auto;
+  height: 100px;
 }
 
 .board {
@@ -88,6 +89,7 @@ body {
   border: solid 1px;
   margin: auto;
 }
+
 
 p {
   margin-bottom: 0px;
