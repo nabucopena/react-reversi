@@ -4,13 +4,14 @@
   font-size: 24px;
   font-weight: bold;
   line-height: 34px;
-  height: 68px;
+  height: 72px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 68px;
+  width: 72px;
   vertical-align: top;
+  opacity: 0.75;
 }
 
 .wSquare {
@@ -24,7 +25,7 @@
 .xPiece {
   background-size: cover;
   background-position: center center;
-  background-image: url("../public/putin_face.jpeg");
+  background-image: url("../public/putin_face.png");
 }
 
 .oPiece {
@@ -35,6 +36,7 @@
 
 .board-row {
   margin: auto;
+  width: 90%
 } 
 
 #game {
@@ -56,10 +58,34 @@
   padding: 10px;
 } 
 
-#turnFlag {
-  width: 40px;
-  height: 20px;
-  vertical-align: center center;
-  border: solid 1px;
+div.flag {
+  width: 20%;
 }
 
+img.flag {
+  text-align: right;
+  display: block;
+  width: 20%;
+  border: solid 1px;
+  margin-top: 10%;
+}
+
+body {
+  background-size: cover;
+  background-image: url("../public/background.jpeg")
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+#ukraine_flag {
+  margin-left: 70%;
+  margin-right: 10%;
+}
+
+#russia_flag {
+  margin-right: 70%;
+  margin-left: 10%;
+}

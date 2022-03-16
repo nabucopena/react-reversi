@@ -86,7 +86,7 @@ function Game(props) {
       <div id="gameInfo">
         {status === 'Ended' ? <p> Ended </p> :
           <p> Turn: 
-            <img id="turnFlag" src={status === 'X' ? "../russia_flag.png" : "../ukraine_flag.png"}/>
+            <img id="turnFlag" className="flag" src={status === 'X' ? "russia_flag.png" : "ukraine_flag.png"}/>
           </p>
         } 
         <p> Winning: {winner} </p>
@@ -103,12 +103,20 @@ function Game(props) {
           </button>
         </p>
       </div>
-      <div id="board">
-        <Board
-          squares={board}
-          onClick={(i) => {handleClick(i)}}
-          boardWidth={boardWidth}
-        />
+      <div className="flex">
+        <div className="flag">
+          <img className="flag" id="ukraine_flag" src="ukraine_flag.png"/>
+        </div>
+        <div id="board">
+          <Board
+            squares={board}
+            onClick={(i) => {handleClick(i)}}
+            boardWidth={boardWidth}
+          />
+        </div>
+        <div className="flag">
+          <img className="flag" id="russia_flag" src="russia_flag.png"/>
+        </div>
       </div>
     </div>
   )
