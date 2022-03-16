@@ -19,7 +19,7 @@ export function playTurn(gameState, square) {
 export function botMove(gameState) {
   const points = gameState.squares.map(
     (x, i) => (
-      !x && evalBoard(move(gameState, i).squares, gameState.turn)
+      !x && evalBoard(move(gameState, i).squares, gameState.boardWidth, gameState.turn)
     )
   );
   const bestMovesArray = points.reduce(
@@ -32,14 +32,25 @@ export function botMove(gameState) {
     ),
     [0]
   );
-  return bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
+  const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
+  return r;
 }
 
-function evalBoard(board, player) {
-  const result = board.filter(x => x == player).length; 
+function getCorners (board) {
+  return [0, board.width - 1, board.length - 1, board.length - board.width]
+}
+
+function evalBoard(board, boardWidth, player) {
+  const corners = {quantity: getCorners({width: boardWidth, length: board.length}).filter((x) => board[x] == player).length, value: 3};
+  const pieces = {quantity: board.filter(x => x == player).length, value: 1}; 
+  const elements_values = [corners, pieces];
   
+  const result = elements_values.map(({quantity, value}) => quantity*value).reduce((a, b) => a+b, 0);
   return result;
 }
+
+
+
 
 function somePossibleMove(gameState) {
   const result = gameState.squares.some(
