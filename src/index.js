@@ -125,12 +125,26 @@ function Game(props) {
   )
 }
 
+function Start(props) {
+  return(<button onClick={props.onClick}> click </button>)
+}
+
+function Page(props) {
+  const [pageState, setPageState] = useState('start');
+  
+  return(
+    pageState === 'start' ? <Start
+        onClick={() => {setPageState('game')}}
+      /> : <Game/>
+  )
+}
+
 
 
 // ================================
 
 ReactDOM.render(
-  <Game />,
+  <Page />,
   document.getElementById('root')
 );
 
