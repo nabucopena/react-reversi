@@ -110,21 +110,20 @@ p.restart {
   margin: auto;
 }
 
-.selectUkraineFlag {
+.select-flag {
   width: 48%;
   height: 200px;
-  background-image: url("../public/ukraine_flag.png");
   background-size: cover;
   background-position: center center;
+}
+
+.selectUkraineFlag {
+  background-image: url("../public/ukraine_flag.png");
   margin-right: 2%;
 }
 
 .selectRussiaFlag {
-  width: 48%;
-  height: 200px;
   background-image: url("../public/russia_flag.png");
-  background-size: cover;
-  background-position: center center;
   margin-left: 2%;
 }
 

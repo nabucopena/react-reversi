@@ -128,8 +128,8 @@ function Start(props) {
         Select player
       </p>
     </div>
-    <button className="selectUkraineFlag" onClick={props.onClick} />
-    <button className="selectRussiaFlag" onClick={props.onClick} />
+    <button className="select-flag selectUkraineFlag" onClick={props.onClick} />
+    <button className="select-flag selectRussiaFlag" onClick={props.onClick} />
   </div>
   )
 }
