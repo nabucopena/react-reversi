@@ -38,7 +38,7 @@
   width: 90%
 } 
 
-#game {
+.game {
 }
 
 #gameInfo {
@@ -75,15 +75,15 @@ body {
   flex-direction: row;
 }
 
-#ukraine_flag {
+.ukraine_flag {
   margin-left: 70%;
 }
 
-#russia_flag {
+.russia_flag {
   margin-right: 70%;
 }
 
-#turnFlag {
+.turnFlag {
   width: 75px;
   border: solid 1px;
   margin: auto;
@@ -93,7 +93,7 @@ p {
   margin-bottom: 0px;
 }
 
-p#restart {
+p.restart {
   position: absolute;
   bottom: 0;
 }

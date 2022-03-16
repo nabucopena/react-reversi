@@ -84,21 +84,21 @@ function Game(props) {
 
 
   return (
-    <div id="game">
+    <div className="game">
       <div id="gameInfo"> 
         {status === 'Ended' ? <p> Ended </p> :
           <div className="center">
             <p>
               Turn 
             </p>
-            <img id="turnFlag" src={status === 'X' ? "russia_flag.png" : "ukraine_flag.png"}/>
+            <img className="turnFlag" src={status === 'X' ? "russia_flag.png" : "ukraine_flag.png"}/>
           </div>
         } 
       </div>
       <div className="flex">
         <div className="flag">
-          <img className="flag" id="ukraine_flag" src="ukraine_flag.png"/>
-          <p id="ukraine_flag" className="points">
+          <img className="flag ukraine_flag" src="ukraine_flag.png"/>
+          <p className="points ukraine_flag">
             {ukraine_points} 
           </p>
         </div>
@@ -110,11 +110,11 @@ function Game(props) {
           />
         </div>
         <div className="flag">
-          <img className="flag" id="russia_flag" src="russia_flag.png"/>
-          <p id="russia_flag" className="points">
+          <img className="flag russia_flag" src="russia_flag.png"/>
+          <p className="points russia_flag">
             {russia_points}
           </p>
-          <p id="restart">
+          <p className="restart">
             <button onClick= {restartGame}>
               Restart
             </button>
