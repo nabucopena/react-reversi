@@ -99,5 +99,9 @@ p#restart {
 }
  
 .points {
+  font-weight: bold;
+  color: #4B5320;
+  font-size: xx-large;
   text-align: center;
 }
+
