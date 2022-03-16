@@ -41,14 +41,14 @@
 .game {
 }
 
-#gameInfo {
+.gameInfo {
   font-size: xx-large;
   text-align: center;
   width: 50%;
   margin: auto;
 }
 
-#board {
+.board {
   margin: auto;
   width: 50%;
 } 
@@ -105,3 +105,35 @@ p.restart {
   text-align: center;
 }
 
+.center {
+  width: 50%;
+  margin: auto;
+}
+
+.selectUkraineFlag {
+  width: 48%;
+  height: 200px;
+  background-image: url("../public/ukraine_flag.png");
+  background-size: cover;
+  background-position: center center;
+  margin-right: 2%;
+}
+
+.selectRussiaFlag {
+  width: 48%;
+  height: 200px;
+  background-image: url("../public/russia_flag.png");
+  background-size: cover;
+  background-position: center center;
+  margin-left: 2%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.select-player {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 10px;
+}

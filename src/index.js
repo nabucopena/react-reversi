@@ -85,7 +85,7 @@ function Game(props) {
 
   return (
     <div className="game">
-      <div id="gameInfo"> 
+      <div className="gameInfo"> 
         {status === 'Ended' ? <p> Ended </p> :
           <div className="center">
             <p>
@@ -102,7 +102,7 @@ function Game(props) {
             {ukraine_points} 
           </p>
         </div>
-        <div id="board">
+        <div className="board">
           <Board
             squares={board}
             onClick={(i) => {handleClick(i)}}
@@ -126,7 +126,17 @@ function Game(props) {
 }
 
 function Start(props) {
-  return(<button onClick={props.onClick}> click </button>)
+  return(
+  <div className="center">
+    <div className="center">
+      <p className="text-center select-player">
+        Select player
+      </p>
+    </div>
+    <button className="selectUkraineFlag"/>
+    <button className="selectRussiaFlag"/>
+  </div>
+  )
 }
 
 function Page(props) {
