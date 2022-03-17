@@ -165,8 +165,8 @@ function Start(props) {
         Select player
       </p>
     </div>
-    <button className="select-flag selectUkraineFlag" onClick={() => {props.onClick('ukraine')}} />
-    <button className="select-flag selectRussiaFlag" onClick={() => {props.onClick('russia')}} />
+    <img src="ukraine_flag.png" className="select-flag selectUkraineFlag" onClick={() => {props.onClick('ukraine')}} />
+    <img src="russia_flag.png" className="select-flag selectRussiaFlag" onClick={() => {props.onClick('russia')}} />
   </div>
   )
 }
