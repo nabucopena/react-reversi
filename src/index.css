@@ -112,6 +112,11 @@ p.restart {
   margin: auto;
 }
 
+img.center {
+  margin-top: 50px;
+  width: 100%
+}
+
 .select-flag {
   width: 48%;
   height: 200px;

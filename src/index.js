@@ -84,7 +84,10 @@ function Game(props) {
     setSquares( newBoard );
     if (newTurn == 'ended') {
       setTimeout(
-        () => props.setPageState('ended'),
+        () => {
+          props.setPageState('ended');
+          props.setWinner(winning(gameState.squares))
+        },
         2000
       )
     } else {
@@ -170,13 +173,16 @@ function Start(props) {
 
 function Ended(props) {
   return(
-    <div/>
+    <div className="center">
+      <img className="center" src={props.winner+"_win.jpeg"}/>
+    </div>
   )
 }
 
 function Page(props) {
-  const [pageState, setPageState] = useState('start');
+  const [pageState, setPageState] = useState('start');   //change this when finish
   const [player, setPlayer] = useState();
+  const [winner, setWinner] = useState(); //change this when finish
   
   return(
     pageState === 'start' ? <Start
@@ -186,9 +192,10 @@ function Page(props) {
         <Game
           player={player == 'russia' ? 'X' : 'O'}
           setPageState={setPageState} 
+          setWinner={setWinner}
         /> :
         <Ended
-          player={player}
+          winner={winner == 'X' ? 'russia' : 'ukraine'}
         />
   )
 }
