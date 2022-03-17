@@ -132,26 +132,24 @@ function Game(props) {
           </div>
         } 
       </div>
-      <div className="flex">
-        <div className="flag">
-          <img className="flag ukraine_flag" src="ukraine_flag.png"/>
-          <p className="points ukraine_flag">
-            {ukraine_points} 
-          </p>
-        </div>
-        <div className="board">
-          <Board
-            squares={board}
-            onClick={(i) => {handleClick({squares, turn, boardWidth},i)}}
-            boardWidth={boardWidth}
-          />
-        </div>
-        <div className="flag">
-          <img className="flag russia_flag" src="russia_flag.png"/>
-          <p className="points russia_flag">
-            {russia_points}
-          </p>
-        </div>
+      <div className="flag ukr-flag">
+        <img className="flag ukraine_flag" src="ukraine_flag.png"/>
+        <p className="points ukraine_flag">
+          {ukraine_points} 
+        </p>
+      </div>
+      <div className="board">
+        <Board
+          squares={board}
+          onClick={(i) => {handleClick({squares, turn, boardWidth},i)}}
+          boardWidth={boardWidth}
+        />
+      </div>
+      <div className="flag rus-flag">
+        <img className="flag russia_flag" src="russia_flag.png"/>
+        <p className="points russia_flag">
+          {russia_points}
+        </p>
       </div>
     </div>
   )
