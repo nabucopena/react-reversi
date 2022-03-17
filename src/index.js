@@ -82,8 +82,14 @@ function Game(props) {
     const {squares: newBoard, turn: newTurn } = t;
 
     setSquares( newBoard );
-    setTurn( newTurn );
-  
+    if (newTurn == 'ended') {
+      setTimeout(
+        () => props.setPageState('ended'),
+        2000
+      )
+    } else {
+      setTurn( newTurn );
+    }
     if (newTurn == (props.player == 'X' ? 'O' : 'X')) {
       setTimeout (
         () => {
@@ -162,6 +168,12 @@ function Start(props) {
   )
 }
 
+function Ended(props) {
+  return(
+    <div/>
+  )
+}
+
 function Page(props) {
   const [pageState, setPageState] = useState('start');
   const [player, setPlayer] = useState();
@@ -169,9 +181,15 @@ function Page(props) {
   return(
     pageState === 'start' ? <Start
         onClick={(player) => {setPageState('game'); setPlayer(player);}}
-      /> : <Game
-        player={player == 'russia' ? 'X' : 'O'}
-      />
+      /> :
+      pageState === 'game' ?
+        <Game
+          player={player == 'russia' ? 'X' : 'O'}
+          setPageState={setPageState} 
+        /> :
+        <Ended
+          player={player}
+        />
   )
 }
 
