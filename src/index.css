@@ -153,12 +153,12 @@ img.center {
   margin-right: 70%;
 }
 
-@media (max-aspect-ratio: 3/2) {
+@media (max-aspect-ratio: 1/1) {
   .game {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 5px;
-    grid-template-rows: 4fr 3fr 10fr;
+    grid-template-rows: 4fr 3fr 16fr;
   }
 
   .gameInfo {
