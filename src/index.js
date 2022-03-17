@@ -171,8 +171,8 @@ function Start(props) {
 
 function Ended(props) {
   return(
-    <div className="center">
-      <img className="center" src={props.winner+"_win.jpeg"}/>
+    <div className="endDiv">
+      <img className="endImage" src={props.winner+"_win.jpeg"}/>
     </div>
   )
 }
