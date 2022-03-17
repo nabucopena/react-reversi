@@ -29,22 +29,22 @@ export function botMove(gameState) {
       !x &&
       evalBoard(gameState.squares, gameState.boardWidth, gameState.turn) <
         evalBoard(move(gameState, i).squares, gameState.boardWidth, gameState.turn) &&
-      {ind: i, val: botMove1({squares: move(gameState, i).squares, boardWidth: gameState.boardWidth, turn: opponentTurn(gameState.turn)})}
+      {ind: i, val: 1/botMove1({squares: move(gameState, i).squares, boardWidth: gameState.boardWidth, turn: opponentTurn(gameState.turn)})}
     )
   ).filter((item) => !!item);
 
   const bestMovesArray = points.reduce(
     (bestIndices, currentValue, currentIndex) => (
-      currentValue.val > points[bestIndices[0].val] ?
-        [currentValue.ind] :
-        currentValue == points[bestIndices[0].val] ?
-          [...bestIndices, currentValue.ind]:
+      currentValue.val > points[bestIndices[0]].val ?
+        [currentIndex] :
+        currentValue.val == points[bestIndices[0]].val ?
+          [...bestIndices, currentIndex]:
           bestIndices
     ),
-    [{val: 0, ind: undefined}]
+    [0]
   );
 
-  const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
+  const r = points[bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]].ind
   return r;
 }
 
@@ -55,18 +55,15 @@ function botMove1(gameState) {
       !x && evalBoard(move(gameState, i).squares, gameState.boardWidth, gameState.turn)
     )
   );
-  const bestMovesArray = points.reduce(
-    (bestIndices, currentValue, currentIndex) => (
-      currentValue > points[bestIndices[0]] ?
-        [currentIndex] :
-        currentValue == points[bestIndices[0]] ?
-          [...bestIndices, currentIndex]:
-          bestIndices
+  const bestMovePoints = points.reduce(
+    (bestValue, currentValue) => (
+      currentValue > bestValue ?
+        currentValue :
+          bestValue
     ),
     [0]
   );
-  const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
-  return r;
+  return bestMovePoints;
 }
 
 
