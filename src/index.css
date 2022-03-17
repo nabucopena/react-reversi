@@ -5,6 +5,7 @@
   line-height: 34px;
   width: 12.5%;
   aspect-ratio: 1;
+  max-height: 10vh;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -35,7 +36,8 @@
 
 .board-row {
   margin: auto;
-  width: 90%
+  width: 90%;
+  max-width: 80vh;
 } 
 
 .game {
@@ -57,10 +59,12 @@
 }
 
 .board {
-  padding-bottom: 100px;
+  max-height: 85vh;
+  padding-bottom: 5vh;
 } 
 
 div.flag {
+  max-height: 85vh;
   width: 20%;
 }
 
@@ -162,6 +166,7 @@ img.center {
   }
 
   .gameInfo {
+    max-width: 15vh;
     grid-column: 2;
     grid-row: 1;
   }
