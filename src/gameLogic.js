@@ -16,6 +16,12 @@ export function playTurn(gameState, square) {
   return (result)
 }
 
+function opponentTurn(turn) {
+  return turn == 'X' ? 'O' : 'X'
+}
+
+
+
 export function botMove(gameState) {
   const points = gameState.squares.map(
     (x, i) => (
@@ -35,6 +41,13 @@ export function botMove(gameState) {
   const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
   return r;
 }
+
+
+
+
+
+
+
 
 function getCorners (board) {
   return [0, board.width - 1, board.length - 1, board.length - board.width]
