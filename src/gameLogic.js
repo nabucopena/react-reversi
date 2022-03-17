@@ -23,6 +23,33 @@ function opponentTurn(turn) {
 
 
 export function botMove(gameState) {
+
+  const points = gameState.squares.map(
+    (x, i) => (
+      !x &&
+      evalBoard(gameState.squares, gameState.boardWidth, gameState.turn) <
+        evalBoard(move(gameState, i).squares, gameState.boardWidth, gameState.turn) &&
+      {ind: i, val: botMove1({squares: move(gameState, i).squares, boardWidth: gameState.boardWidth, turn: opponentTurn(gameState.turn)})}
+    )
+  ).filter((item) => !!item);
+
+  const bestMovesArray = points.reduce(
+    (bestIndices, currentValue, currentIndex) => (
+      currentValue.val > points[bestIndices[0].val] ?
+        [currentValue.ind] :
+        currentValue == points[bestIndices[0].val] ?
+          [...bestIndices, currentValue.ind]:
+          bestIndices
+    ),
+    [{val: 0, ind: undefined}]
+  );
+
+  const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
+  return r;
+}
+
+
+function botMove1(gameState) {
   const points = gameState.squares.map(
     (x, i) => (
       !x && evalBoard(move(gameState, i).squares, gameState.boardWidth, gameState.turn)
@@ -41,7 +68,6 @@ export function botMove(gameState) {
   const r = bestMovesArray[Math.floor(Math.random()*bestMovesArray.length)]
   return r;
 }
-
 
 
 
